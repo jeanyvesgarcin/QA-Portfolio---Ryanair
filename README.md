@@ -30,14 +30,11 @@ API Testing Strategies: Comprehensive plan outlining the approach and strategies
 API Endpoint Validation: Detailed test cases focused on endpoints, payloads, and responses for the Ryanair API. 🕵️‍♂️
 
 # Upcoming 🚀
-Mobile Testing 📱
+- Mobile Testing 📱
 Mobile App Validation: Planned activities and documentation for testing the Ryanair mobile application. 📲
-
-# Performance Testing ⏱️
+- Performance Testing ⏱️
 Performance Metrics: Strategies and documentation for conducting performance tests on the Ryanair platform. 📈
-
-# Security Testing 🔒
+- Security Testing 🔒
 Security Measures Analysis: Planned activities and documentation for evaluating the security measures of the Ryanair platform. 🛡️
-
-# Automation 🤖
+- Automation 🤖
 Test Automation Approach: Information and resources related to automated testing strategies used for Ryanair platform testing. ⚙️
