@@ -1,10 +1,8 @@
- Here is how I would structure the Lighthouse results and analysis for the Ryanair website as a QA engineer building my portfolio on GitHub:
-
 # Ryanair Website - Lighthouse Report
 
 ## Overview
 
-I ran Lighthouse against the Ryanair homepage (https://www.ryanair.com/fr/fr) to audit its performance, accessibility, best practices, and SEO. 
+I ran Lighthouse against the Ryanair homepage (https://www.ryanair.com/) to audit its performance, accessibility, best practices, and SEO. 
 
 ## Test Setup
 
