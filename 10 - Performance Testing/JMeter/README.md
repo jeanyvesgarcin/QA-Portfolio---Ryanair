@@ -10,8 +10,8 @@
 3. Monitored response times using listeners (e.g., Aggregate Report) during test execution.
 
 **Results:**
-- Average response time observed: [Insert Response Time]
-- Maximum response time recorded: [Insert Response Time]
+- Average response time observed: [239 ms]
+- Maximum response time recorded: [633 ms]
 - Response time remained within acceptable thresholds.
 
 ### 2. Check Application Capacity Before Crashing
