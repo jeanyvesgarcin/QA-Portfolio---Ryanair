@@ -31,13 +31,13 @@ Welcome to my GitHub repository showcasing QA Engineering work focused on testin
 ### API Test Cases 🖥️
 - **API Endpoint Validation**: Detailed test cases focused on endpoints, payloads, and responses for the Ryanair API. 🕵️‍♂️
 
+### Performance Testing ⏱️
+- **Performance Metrics**: Strategies and documentation for conducting performance tests on the Ryanair platform. 📈
+
 ## Upcoming 🚀
 
 ### Mobile Testing 📱
 - **Mobile App Validation**: Planned activities and documentation for testing the Ryanair mobile application. 📲
-
-### Performance Testing ⏱️
-- **Performance Metrics**: Strategies and documentation for conducting performance tests on the Ryanair platform. 📈
 
 ### Security Testing 🔒
 - **Security Measures Analysis**: Planned activities and documentation for evaluating the security measures of the Ryanair platform. 🛡️
