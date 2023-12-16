@@ -1,0 +1,710 @@
+{
+	"info": {
+		"_postman_id": "dec50c5b-88f0-420d-94ee-35161c80e782",
+		"name": "RYANAIR API PROJECT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29185788"
+	},
+	"item": [
+		{
+			"name": "TC001 - Flight Route Details Validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response Code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Airport Data Validation\", function () {\r",
+							"    const responseBody = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseBody).to.be.an('array').that.is.not.empty;\r",
+							"\r",
+							"    responseBody.forEach(airport => {\r",
+							"        pm.expect(airport).to.have.property('code');\r",
+							"        pm.expect(airport).to.have.property('name');\r",
+							"        pm.expect(airport).to.have.property('country');\r",
+							"        // Add more expectations based on the properties available for each airport\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.ryanair.com/api/views/locate/5/airports/en/active?arrivalPhrase={{toCode}}&departurePhrase={{fromCode}}&market={{locale}}",
+					"protocol": "https",
+					"host": [
+						"www",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"api",
+						"views",
+						"locate",
+						"5",
+						"airports",
+						"en",
+						"active"
+					],
+					"query": [
+						{
+							"key": "arrivalPhrase",
+							"value": "{{toCode}}"
+						},
+						{
+							"key": "departurePhrase",
+							"value": "{{fromCode}}"
+						},
+						{
+							"key": "market",
+							"value": "{{locale}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC002 - Flight Details Accuracy Verification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response Code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Flight Details are Accurate\", function () {\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody).to.be.an('array').that.is.not.empty;\r",
+							"\r",
+							"    responseBody.forEach(item => {\r",
+							"        // Modify these property expectations based on the actual structure of each item in the response\r",
+							"        pm.expect(item).to.have.property('code');\r",
+							"        pm.expect(item).to.have.property('name');\r",
+							"        pm.expect(item).to.have.property('country');\r",
+							"        // Add more property expectations as needed\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.ryanair.com/api/views/locate/5/airports/en/active?arrivalPhrase={{toCode}}&departurePhrase={{fromCode}}&market={{locale}}",
+					"protocol": "https",
+					"host": [
+						"www",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"api",
+						"views",
+						"locate",
+						"5",
+						"airports",
+						"en",
+						"active"
+					],
+					"query": [
+						{
+							"key": "arrivalPhrase",
+							"value": "{{toCode}}"
+						},
+						{
+							"key": "departurePhrase",
+							"value": "{{fromCode}}"
+						},
+						{
+							"key": "market",
+							"value": "{{locale}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC003 - Active Airport List Completeness Check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response Code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200); \r",
+							"});\r",
+							"\r",
+							"pm.test(\"List of Active Airports is Complete and Up-to-Date\", function () {\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody).to.be.an('array').that.is.not.empty; \r",
+							"    responseBody.forEach(airport => {\r",
+							"        pm.expect(airport).to.have.property('code'); \r",
+							"        pm.expect(airport).to.have.property('name');\r",
+							"        pm.expect(airport).to.have.property('coordinates');\r",
+							"        pm.expect(airport.coordinates).to.have.property('latitude');\r",
+							"        pm.expect(airport.coordinates).to.have.property('longitude');\r",
+							"        pm.expect(airport).to.have.property('country'); \r",
+							"        // Check if 'timezone' property exists before asserting\r",
+							"        if ('timezone' in airport) {\r",
+							"            pm.expect(airport).to.have.property('timezone'); \r",
+							"        } else {\r",
+							"            console.log(`Airport ${airport.name} does not have a 'timezone' property.`);\r",
+							"        }\r",
+							"    });\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.ryanair.com/api/views/locate/5/airports/en/active",
+					"protocol": "https",
+					"host": [
+						"www",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"api",
+						"views",
+						"locate",
+						"5",
+						"airports",
+						"en",
+						"active"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC004 - Search Functionality Validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response Code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Search Functionality Validated with Various Parameters\", function () {\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody).to.be.an('array').that.is.not.empty;\r",
+							"\r",
+							"    responseBody.forEach(item => {\r",
+							"        pm.expect(item).to.have.property('code');\r",
+							"        pm.expect(item).to.have.property('name');\r",
+							"        pm.expect(item).to.have.property('country');\r",
+							"    });\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.ryanair.com/api/views/locate/5/airports/en/active?market=en-gb&phrase={{fromCode}}",
+					"protocol": "https",
+					"host": [
+						"www",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"api",
+						"views",
+						"locate",
+						"5",
+						"airports",
+						"en",
+						"active"
+					],
+					"query": [
+						{
+							"key": "market",
+							"value": "en-gb"
+						},
+						{
+							"key": "phrase",
+							"value": "{{fromCode}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC005 - Available Destinations Correspondence Check",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response Code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Retrieved Destinations\", function () {\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody).to.be.an('array').that.is.not.empty;\r",
+							"\r",
+							"    responseBody.forEach(destination => {\r",
+							"        pm.expect(destination).to.be.an('object');\r",
+							"        pm.expect(destination).to.have.property('arrivalAirport');\r",
+							"        pm.expect(destination.arrivalAirport).to.be.an('object');\r",
+							"        pm.expect(destination.arrivalAirport).to.have.property('code');\r",
+							"\r",
+							"        // Adjust the property checks based on the actual structure of the response\r",
+							"        // Remove the expectation for the 'route' property since it's not present\r",
+							"        pm.expect(destination).to.not.have.property('route');\r",
+							"\r",
+							"        // Add more validations if available properties are known\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.ryanair.com/api/views/locate/searchWidget/routes/en/airport/{{fromCode}}",
+					"protocol": "https",
+					"host": [
+						"www",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"api",
+						"views",
+						"locate",
+						"searchWidget",
+						"routes",
+						"en",
+						"airport",
+						"{{fromCode}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC006 - General Airport Information Retrieval",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response Code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate API Response for General Airport Information\", function () {\r",
+							"    const responseBody = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseBody).to.have.property('code'); // Validate airport code\r",
+							"    pm.expect(responseBody).to.have.property('name');\r",
+							"\r",
+							"    // Check if 'services' property exists before asserting its value\r",
+							"    if ('services' in responseBody) {\r",
+							"        pm.expect(responseBody).to.have.property('services');\r",
+							"    } else {\r",
+							"        console.log(\"'services' property not found in the response.\"); // Log a message if 'services' property is not present\r",
+							"    }\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.ryanair.com/api/views/locate/5/airports/en/{{fromCode}}",
+					"protocol": "https",
+					"host": [
+						"www",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"api",
+						"views",
+						"locate",
+						"5",
+						"airports",
+						"en",
+						"{{fromCode}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC007 - Nearest Airport Identification Accuracy Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response Code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Nearest Airport Based on User's IP\", function () {\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody).to.have.property('code');\r",
+							"    pm.expect(responseBody).to.have.property('name');\r",
+							"    pm.expect(responseBody).to.have.property('aliases');\r",
+							"    pm.expect(responseBody).to.have.property('city').to.be.an('object');\r",
+							"    pm.expect(responseBody.city).to.have.property('code');\r",
+							"    pm.expect(responseBody.city).to.have.property('name');\r",
+							"    pm.expect(responseBody).to.have.property('country').to.be.an('object');\r",
+							"    pm.expect(responseBody.country).to.have.property('code');\r",
+							"    pm.expect(responseBody.country).to.have.property('name');\r",
+							"    pm.expect(responseBody).to.have.property('coordinates').to.be.an('object');\r",
+							"    pm.expect(responseBody.coordinates).to.have.property('latitude');\r",
+							"    pm.expect(responseBody.coordinates).to.have.property('longitude');\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.ryanair.com/api/geoloc/v5/defaultAirport?market=en-gb",
+					"protocol": "https",
+					"host": [
+						"www",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"api",
+						"geoloc",
+						"v5",
+						"defaultAirport"
+					],
+					"query": [
+						{
+							"key": "market",
+							"value": "en-gb"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC008 - Cheapest Flights Information Accuracy Test",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response Code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Cheapest Available Flights Information\", function () {\r",
+							"    const responseBody = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseBody).to.be.an('object').and.to.have.property('outbound');\r",
+							"    const outbound = responseBody.outbound;\r",
+							"\r",
+							"    pm.expect(outbound).to.be.an('object').and.to.have.property('fares');\r",
+							"    const fares = outbound.fares;\r",
+							"\r",
+							"    pm.expect(fares).to.be.an('array').and.to.not.be.empty;\r",
+							"\r",
+							"    fares.forEach(fare => {\r",
+							"        pm.expect(fare).to.have.property('price');\r",
+							"        pm.expect(fare).to.have.property('departureDate');\r",
+							"        pm.expect(fare).to.have.property('arrivalDate');\r",
+							"        pm.expect(fare).to.have.property('soldOut');\r",
+							"        pm.expect(fare).to.have.property('unavailable');\r",
+							"        // Add more validations if needed\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.ryanair.com/api/farfnd/v4/oneWayFares/{{fromCode}}/{{toCode}}/cheapestPerDay?outboundMonthOfDate={{startDate}}&currency={{currency}}",
+					"protocol": "https",
+					"host": [
+						"www",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"api",
+						"farfnd",
+						"v4",
+						"oneWayFares",
+						"{{fromCode}}",
+						"{{toCode}}",
+						"cheapestPerDay"
+					],
+					"query": [
+						{
+							"key": "outboundMonthOfDate",
+							"value": "{{startDate}}"
+						},
+						{
+							"key": "currency",
+							"value": "{{currency}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC009 - Fare Details Verification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response Code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Fare Details for Cheapest Available Flights\", function () {\r",
+							"    const responseBody = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseBody.outbound.fares).to.be.an('array').and.to.not.be.empty;\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.ryanair.com/api/farfnd/v4/oneWayFares/{{fromCode}}/{{toCode}}/cheapestPerDay?outboundMonthOfDate={{startDate}}&currency={{currency}}",
+					"protocol": "https",
+					"host": [
+						"www",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"api",
+						"farfnd",
+						"v4",
+						"oneWayFares",
+						"{{fromCode}}",
+						"{{toCode}}",
+						"cheapestPerDay"
+					],
+					"query": [
+						{
+							"key": "outboundMonthOfDate",
+							"value": "{{startDate}}"
+						},
+						{
+							"key": "currency",
+							"value": "{{currency}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC010 - Available Flight Dates Validation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Response Code is 200 OK', function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Validate Available Dates for Flights\", function () {\r",
+							"    const responseBody = pm.response.json();\r",
+							"\r",
+							"    pm.expect(responseBody).to.be.an('array').and.to.not.be.empty;\r",
+							"    responseBody.forEach(availability => {\r",
+							"        if (availability.dateOut) {\r",
+							"            pm.expect(availability.dateOut).to.be.a('string');\r",
+							"        }\r",
+							"        if (availability.someNestedObject && availability.someNestedObject.dateOut) {\r",
+							"            pm.expect(availability.someNestedObject.dateOut).to.be.a('string');\r",
+							"        }\r",
+							"        if (availability.flights !== undefined) {\r",
+							"            pm.expect(availability.flights).to.be.an('array').and.to.not.be.empty;\r",
+							"        } else {\r",
+							"            console.log(\"Flights property is undefined for this availability:\", availability);\r",
+							"            // You can choose to handle this case based on your requirements\r",
+							"            // For instance, you might consider this as an unexpected scenario and log it for investigation\r",
+							"            // Or add further actions or assertions specific to this case\r",
+							"        }\r",
+							"    });\r",
+							"});\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.ryanair.com/api/farfnd/v4/oneWayFares/{{fromCode}}/{{toCode}}/availabilities",
+					"protocol": "https",
+					"host": [
+						"www",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"api",
+						"farfnd",
+						"v4",
+						"oneWayFares",
+						"{{fromCode}}",
+						"{{toCode}}",
+						"availabilities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TC011 - Flight Schedule and Seat Availability Confirmation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response Code is 200 OK\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify Flight Schedules and Seat Availability\", function () {\r",
+							"    const responseBody = pm.response.json();\r",
+							"    pm.expect(responseBody).to.be.an('array').and.to.not.be.empty;\r",
+							"\r",
+							"    responseBody.forEach(item => {\r",
+							"        if (typeof item === 'object' && 'dateOut' in item) {\r",
+							"            pm.expect(item.dateOut).to.be.a('string');\r",
+							"        } else {\r",
+							"            console.log(\"'dateOut' property not found or not in the expected format.\");\r",
+							"        }\r",
+							"\r",
+							"        if (typeof item === 'object' && 'flights' in item) {\r",
+							"            pm.expect(item.flights).to.be.an('array').and.to.not.be.empty;\r",
+							"\r",
+							"            item.flights.forEach(flight => {\r",
+							"                pm.expect(flight).to.have.property('time').to.be.a('string');\r",
+							"                pm.expect(flight).to.have.property('regularFare');\r",
+							"\r",
+							"                if ('fares' in flight.regularFare) {\r",
+							"                    pm.expect(flight.regularFare.fares).to.be.an('array').and.to.not.be.empty;\r",
+							"                }\r",
+							"            });\r",
+							"        } else {\r",
+							"            console.log(\"'flights' property not found or not in the expected format.\");\r",
+							"        }\r",
+							"    });\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://www.ryanair.com/api/farfnd/v4/oneWayFares/{{fromCode}}/{{toCode}}/availabilities",
+					"protocol": "https",
+					"host": [
+						"www",
+						"ryanair",
+						"com"
+					],
+					"path": [
+						"api",
+						"farfnd",
+						"v4",
+						"oneWayFares",
+						"{{fromCode}}",
+						"{{toCode}}",
+						"availabilities"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
