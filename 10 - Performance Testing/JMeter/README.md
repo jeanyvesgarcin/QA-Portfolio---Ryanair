@@ -16,7 +16,6 @@
 - Response time remained within acceptable thresholds.
 
 
-
 ### • Verify Response Time Under Different Load Conditions
 
 **Objective:** Evaluate the response times for the Ryanair website under varied load conditions.
