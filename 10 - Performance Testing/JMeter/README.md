@@ -1,6 +1,6 @@
 ## Performance Testing Documentation for Ryanair Website
 
-### Verify Response Time for 1000 Users
+### • Verify Response Time for 1000 Users
 
 **Objective:** Validate the response time of the Ryanair website under a load of 1000 simultaneous users.
 
@@ -16,7 +16,7 @@
 - Response time remained within acceptable thresholds.
 
 
-### Verify Response Time Under Different Load Conditions
+### • Verify Response Time Under Different Load Conditions
 
 **Objective:** Evaluate the response times for the Ryanair website under varied load conditions.
 
