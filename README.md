@@ -35,7 +35,7 @@ Welcome to my GitHub repository showcasing QA Engineering work focused on testin
 - **Performance Metrics**: Strategies and documentation for conducting performance tests on the Ryanair platform. 📈
 
 ### Crossbrowser Testing ↩️
-Crossbrowser Testing: Strategies and methodologies employed for conducting comprehensive compatibility tests on the Ryanair platform across different OS (Windows, Mac), mobile (Android, iOS), browsers (Chrome, Firefox, Opera, Safari, Edge) using BrowserStack.
+- **Crossbrowser Testing**: Strategies and methodologies employed for conducting comprehensive compatibility tests on the Ryanair platform across different OS (Windows, Mac), mobile (Android, iOS), browsers (Chrome, Firefox, Opera, Safari, Edge) using BrowserStack.
 
 ## Upcoming 🚀
 
