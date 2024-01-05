@@ -1,4 +1,6 @@
 # Ryanair Website - Lighthouse Report
+_Report written with the help of Claude AI_
+
 
 ## Overview
 
